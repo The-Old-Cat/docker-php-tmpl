@@ -1,2 +1,2 @@
 # docker-php-tmpl
-'default'  заменить на <site-name>
+'default'  заменить на '<site-name>'
