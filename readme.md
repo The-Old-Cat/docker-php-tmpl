@@ -1,68 +1,51 @@
 
-
-
 Остановить все Docker контейнеры.
 
 sudo docker stop $(docker ps -a -q)
-
 
 Удалить все Docker контейнеры
 
 sudo docker rm $(docker ps -a -q)
 
-
 docker run -d -p 9000:9000 -v ~/.docker/machine/certs:/certs portainer/portainer -H tcp://192.168.99.100:2376 --tlsverify
 
+  Install Docker for MX Linux 19
+  Update the apt package index:
 
+sudo apt-get update
 
-install Docker
+  Install packages to allow apt to use a repository over HTTPS:
 
-First, download and add Docker CE GPG key with the following command:
+sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common
 
-wget https://download.docker.com/linux/ubuntu/gpg
-sudo apt-key add gpg
+   Add Docker’s official GPG key:
 
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 
-Next, add the Docker CE repository to APT with the following command:
+    Verify that you now have the key with the fingerprint 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88, by searching for the last 8 characters of the fingerprint:
 
-sudo gedit /etc/apt/sources.list.d/docker.list
+sudo apt-key fingerprint 0EBFCD88
 
+    Add stable repository:
 
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 
-Add the following line:
+    Update the apt package index:   
 
-deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+sudo apt-get update
 
+    Install the latest version of Docker Engine - Community and containerd, or go to the next step to install a specific version:
 
+sudo apt-get install docker-ce docker-ce-cli docker-compose containerd.io 
 
-Save and close the file, when you are finished. Then, update the repository with the following command:
+    This command downloads a test image and runs it in a container. When the container runs, it prints an informational message and exits:
 
-sudo apt-get update -y
+sudo docker run hello-world
 
+    Manage containers with non-root user:
 
-
-Once the repository is updated, install Docker CE with the following command:
-
-sudo apt-get install docker-ce -y
-sudo apt-get install docker
-
-After installing Docker CE, check the Docker service with the following command:
-
-sudo systemctl status docker
-
-
-Run this command to download the current stable release of Docker Compose
-
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-sudo chmod +x /usr/local/bin/docker-compose
-
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-
+sudo groupadd docker && sudo usermod -aG docker $USER && newgrp docker
 docker-compose --version
-
-
-
 
 Как установить Docker Portainer
 
@@ -80,12 +63,12 @@ docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.
 
 docker ps
 Настройка Portainer
+
 1. Вход
 
 Получить доступ к программе вы можете через веб-интерфейс на порту 9000. Откройте его в браузере. На первом шаге надо будет ввести имя пользователя и пароль, под которым вы будете входить в систему:
 
 Затем выберите метод подключения к Docker. Для начала можно подключиться к локальному сервису Docker. Для этого выберите Local:
-
 
 Как обновить Portainer
 
@@ -114,12 +97,11 @@ docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.
 
 docker ps
 
-http://localhost:9000
+<http://localhost:9000>
 
 Остановить все Docker контейнеры.
 
 sudo docker stop $(docker ps -a -q)
-
 
 Удалить все Docker контейнеры
 
@@ -129,10 +111,8 @@ sudo docker rm $(docker ps -a -q)
 sudo groupadd docker
 sudo usermod -aG docker $USER
 
-
 docker-shop-webdevkin
-phpmyadmin 
+phpmyadmin
 localhost:8001
 
-
-127.0.0.1 нужно заменить на адрес виртуальной машины, в которой запускается докер, 
+127.0.0.1 нужно заменить на адрес виртуальной машины, в которой запускается докер,
