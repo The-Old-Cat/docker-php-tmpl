@@ -9,8 +9,8 @@ sudo docker rm $(docker ps -a -q)
 
 docker run -d -p 9000:9000 -v ~/.docker/machine/certs:/certs portainer/portainer -H tcp://192.168.99.100:2376 --tlsverify
 
-  Install Docker for MX Linux 19
-  Update the apt package index:
+  **Install Docker for MX Linux 19
+  Update the apt package index:**
 
 sudo apt-get update
 
