@@ -14,10 +14,10 @@ sudo docker rm $(docker ps -a -q)
 
 docker run -d -p 9000:9000 -v ~/.docker/machine/certs:/certs portainer/portainer -H tcp://192.168.99.100:2376 --tlsverify
 
-  **Install Docker for MX Linux 19
+  **Install Docker for  Linux 
   Update the apt package index:**
 
-sudo apt-get update
+sudo apt update && sudo apt upgrade
 
   Install packages to allow apt to use a repository over HTTPS:
 
@@ -25,23 +25,25 @@ sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-pr
 
    Add Docker’s official GPG key:
 
-curl -fsSL <https://download.docker.com/linux/debian/gpg> | sudo apt-key add -
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+
+echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
 
     Verify that you now have the key with the fingerprint 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88, by searching for the last 8 characters of the fingerprint:
 
 sudo apt-key fingerprint 0EBFCD88
 
-    Add stable repository:
-
-sudo add-apt-repository "deb [arch=amd64] <https://download.docker.com/linux/debian> $(lsb_release -cs) stable"
-
-    Update the apt package index:   
-
-sudo apt-get update
 
     Install the latest version of Docker Engine - Community and containerd, or go to the next step to install a specific version:
 
 sudo apt-get install docker-ce docker-ce-cli docker-compose containerd.io
+
+apt-cache madison docker-ce
 
     This command downloads a test image and runs it in a container. When the container runs, it prints an informational message and exits:
 
@@ -50,6 +52,7 @@ sudo docker run hello-world
     Manage containers with non-root user:
 
 sudo groupadd docker && sudo usermod -aG docker $USER && newgrp docker
+
 docker-compose --version
 
 Как установить Docker Portainer
