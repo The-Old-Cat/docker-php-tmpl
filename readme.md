@@ -1,3 +1,8 @@
+# 1
+
+git config --global user.email "artkov476@gmail.com"
+
+  git config --global user.name "The-Old-Cat"
 
 Остановить все Docker контейнеры.
 
@@ -20,7 +25,7 @@ sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-pr
 
    Add Docker’s official GPG key:
 
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+curl -fsSL <https://download.docker.com/linux/debian/gpg> | sudo apt-key add -
 
     Verify that you now have the key with the fingerprint 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88, by searching for the last 8 characters of the fingerprint:
 
@@ -28,7 +33,7 @@ sudo apt-key fingerprint 0EBFCD88
 
     Add stable repository:
 
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+sudo add-apt-repository "deb [arch=amd64] <https://download.docker.com/linux/debian> $(lsb_release -cs) stable"
 
     Update the apt package index:   
 
@@ -36,7 +41,7 @@ sudo apt-get update
 
     Install the latest version of Docker Engine - Community and containerd, or go to the next step to install a specific version:
 
-sudo apt-get install docker-ce docker-ce-cli docker-compose containerd.io 
+sudo apt-get install docker-ce docker-ce-cli docker-compose containerd.io
 
     This command downloads a test image and runs it in a container. When the container runs, it prints an informational message and exits:
 
